@@ -16269,6 +16269,10 @@ Pages - My Account
   top: 2px;
 }
 
+.account_dashboard{
+  margin-bottom: 100px;
+}
+
 .account_login_form form .save_button button {
   padding: 0 20px;
   height: 30px;

@@ -67,11 +67,12 @@
                                     <!-- Header Top Menu's Dropdown -->
                                     <ul class="user-sub-menu">
                                         <li><a href="">Checkout</a></li>
-                                        <li><a href="">My Account</a></li>
+                                        <li><a href="/myaccount">My Account</a></li>
                                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form></li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
                                     </ul>
                                 </li>
                                 @else
@@ -101,7 +102,7 @@
                     <div class="col-3">
                         <!-- Logo Header -->
                         <div class="header-logo">
-                            <a href="home"><img src="assets/images/logo/logo.png" alt=""></a>
+                            <a href="/"><img src="assets/images/logo/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-6">
