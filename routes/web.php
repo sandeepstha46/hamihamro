@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutusController;
 use App\Http\Controllers\MyaccountController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/about-us', [AboutusController::class, 'index']);
 
 Route::get('/myaccount', [MyaccountController::class, 'index'])->middleware(['auth']);
 

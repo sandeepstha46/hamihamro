@@ -53,7 +53,13 @@
                 <div class="row d-flex justify-content-between align-items-center">
                     <div class="col-6">
                         <div class="header-top--left">
-                            <span>Welcome to our store!</span>
+                        @if (Route::has('login'))
+                        @auth
+                            <span>Welcome {{ Auth::user()->username }}</span>
+                            @else
+                            <span>Welcome to our store</span>
+                        @endauth
+                        @endif
                         </div>
                     </div>
                     <div class="col-6">
@@ -206,7 +212,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="about-us.html">About Us</a>
+                                        <a href="/about-us">About Us</a>
                                     </li>
                                     <li>
                                         <a href="contact-us.html">Contact Us</a>
@@ -266,38 +272,34 @@
             <!-- Start Mobile Menu User Top -->
             <div class="mobile-menu-top">
                 <span>Welcome to our store!</span>
-                <!-- Start Header Top Menu -->
                 <ul class="mobile-menu-user-menu">
-                    <li><a class="header-user-menu-link" href=""><i class="icon-repeat"></i>Compare (0)</a></li>
-                    <li class="has-mobile-user-dropdown">
-                        <a class="mobile-user-menu-link" href="">Setting</a>
-                        <!-- Header Top Menu's Dropdown -->
-                        <ul class="mobile-user-sub-menu">
-                            <li><a href="">Checkout</a></li>
-                            <li><a href="">My Account</a></li>
-                            <li><a href="">Shopping Cart</a></li>
-                            <li><a href="">Wishlist</a></li>
-                        </ul>
+                @if (Route::has('login'))
+                @auth
+                <li class="has-mobile-user-dropdown">
+                <a class="mobile-user-menu-link"  href="">Setting</a>
+                <ul class="mobile-user-sub-menu">
+                    <li><a href="">Checkout</a></li>
+                    <li><a href="/myaccount">My Account</a></li>
+                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
-                    <li class=" has-mobile-user-dropdown">
-                        <a class="mobile-user-menu-link" href="">$ USD</a>
-                        <!-- Header Top Menu's Dropdown -->
-                        <ul class="mobile-user-sub-menu">
-                            <li><a href="">EUR – Euro</a></li>
-                            <li><a href="">GBP – British Pound</a></li>
-                            <li><a href="">Shopping Cart</a></li>
-                            <li><a href="">INR – India Rupee</a></li>
-                        </ul>
+                </ul>
+                </li>
+                @else
+                <li class="has-mobile-user-dropdown">
+                <a class="mobile-user-menu-link"  href="">New here?</a>
+                    <ul class="mobile-user-sub-menu">
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        @if (Route::has('register'))
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                        @endif
+                @endauth
+                    </ul>
                     </li>
-                    <li class="has-mobile-user-dropdown">
-                        <a class="mobile-user-menu-link" href="">English</a>
-                        <!-- Header Top Menu's Dropdown -->
-                        <ul class="mobile-user-sub-menu">
-                            <li><a href=""><img class="user-sub-menu-link-icon" src="assets/images/icon/lang-en.png" alt=""> English</a></li>
-                            <li><a href=""><img class="user-sub-menu-link-icon" src="assets/images/icon/lang-gr.png" alt=""> Germany</a></li>
-                        </ul>
-                    </li>
-                </ul> <!-- End Header Top Menu -->
+                    @endif
+                </ul>
             </div> <!-- End Mobile Menu User Top -->
             <!-- Start Mobile Menu User Center -->
             <div class="mobile-menu-center">
@@ -313,7 +315,7 @@
                     </div>
                     <div class="mobile-menu-customer-support-text">
                         <span>Customer Support</span>
-                        <a class="mobile-menu-customer-support-text-phone" href="tel:(08)123456789">(08) 123 456 789</a>
+                        <a class="mobile-menu-customer-support-text-phone" href="tel:(08)123456789">(977) 9800000000</a>
                     </div>
                 </div>
                 <!-- Start Header Action Icon -->
@@ -321,13 +323,11 @@
                     <li class="mobile-action-icon-item">
                         <a href="wishlist.html" class="mobile-action-icon-link">
                             <i class="icon-heart"></i>
-                            <span class="mobile-action-icon-item-count">3</span>
                         </a>
                     </li>
                     <li class="mobile-action-icon-item">
                         <a href="cart.html" class="mobile-action-icon-link">
                             <i class="icon-shopping-cart"></i>
-                            <span class="mobile-action-icon-item-count">3</span>
                         </a>
                     </li>
                 </ul> <!-- End Header Action Icon -->
@@ -339,10 +339,6 @@
                     <ul>
                         <li>
                             <a href="#"><span>Home</span></a>
-                            <ul class="mobile-sub-menu">
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="index-2.html">Home 2</a></li>
-                            </ul>
                         </li>
                         <li>
                             <a href="#"><span>Shop</span></a>
@@ -413,22 +409,23 @@
                                 </li>
                             </ul>
                         </li>
+                        <li><a href="about-us">About Us</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
                         <li>
-                            <a href="#"><span>Pages</span></a>
+                            <a href="#"><span>More</span></a>
                             <ul class="mobile-sub-menu">
-                                <li><a href="about-us.html">About Us</a></li>
+
                                 <li><a href="service.html">Service</a></li>
                                 <li><a href="faq.html">Frequently Questions</a></li>
                                 <li><a href="privacy-policy.html">Privacy Policy</a></li>
                                 <li><a href="404.html">404 Page</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact-us.html">Contact Us</a></li>
                     </ul>
                 </div> <!-- End Mobile Menu Nav -->
 
                 <!-- Mobile Manu Mail Address -->
-                <a class="mobile-menu-email icon-text-end" href="mailto:info@yourdomain.com"><i class="fa fa-envelope-o"> info@yourdomain.com</i></a>
+                <a class="mobile-menu-email icon-text-end" href="mailto:info@hamihamro.com"><i class="fa fa-envelope-o"> info@hamihamro.com</i></a>
 
                 <!-- Mobile Manu Social Link -->
                 <ul class="mobile-menu-social">
